@@ -23,7 +23,7 @@ export class UpdateService {
 
     constructor() { }
 
-    setCurrentDeviceType(data: Book) {
+    setCurrentData(data: Book) {
         this.newData.next(data);
     }
 }
