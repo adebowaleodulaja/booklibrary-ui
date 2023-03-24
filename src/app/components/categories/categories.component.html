@@ -1,0 +1,8 @@
+<div class="main-section">
+    <div class="div-btn">
+        <app-button text="Add Category" (btnClick)="openPopup()"></app-button>
+    </div>
+    <app-categories-item></app-categories-item>
+</div>
+<app-add-category [displayStyle]="displayStyle" (btnClick)="closePopup()"
+    (onAddCategory)="addCategory($event)"></app-add-category>

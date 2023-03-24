@@ -1,0 +1,50 @@
+<div class="modal" style="margin-top: 5%" role="dialog" [ngStyle]="{'display': displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Add New Book</h5>
+                <button type="button" class="close"
+                    style="border-radius: 30%; border-width: 0; font-size: 2rem; width: 50px; padding: 0; background: #3B3E52; color: #f4f4f4;"
+                    data-dismiss="modal" (click)="onClosePopup()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="add-form">
+
+                    <!-- <div class="form-control">
+                        <label for="text">Title</label>
+                        <input type="text" name="title" [(ngModel)]="title" id="title" placeholder="Enter book title">
+                    </div> -->
+                    <!-- <label for="day">Author</label> -->
+                    <input type="text" name="title" [(ngModel)]="title" id="title" placeholder="Enter book title">
+
+                    <input type="text" name="author" [(ngModel)]="author" id="author" placeholder="Enter author name">
+
+                    <input type="text" name="publisher" [(ngModel)]="publisher" id="publisher"
+                        placeholder="Enter publisher name">
+
+                    <input type="text" name="isbn" [(ngModel)]="isbn" id="isbn" placeholder="Enter ISBN">
+
+                    <input type="text" name="yearReleased" [(ngModel)]="yearReleased" id="yearReleased"
+                        placeholder="Enter release year">
+
+                    <input type="text" name="noOfCopies" [(ngModel)]="noOfCopies" id="noOfCopies"
+                        placeholder="Enter number of copies">
+
+                    <select [(ngModel)]="categoryId" name="category">
+                        <option value="0">Select Category</option>
+                        <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+                    </select>
+
+                    <!-- <input class="btn btn-block" type="submit" value="Save Changes"> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onClosePopup()"
+                    data-dismiss="modal">Discard</button>
+                <button type="submit" class="btn btn-primary" (click)="onSubmitForm()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

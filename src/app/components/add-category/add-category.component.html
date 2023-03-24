@@ -1,0 +1,27 @@
+<div class="modal" style="margin-top: 5%" role="dialog" [ngStyle]="{'display': displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Add New Category</h5>
+                <button type="button" class="close"
+                    style="border-radius: 30%; border-width: 0; font-size: 2rem; width: 50px; padding: 0; background: #3B3E52; color: #f4f4f4;"
+                    data-dismiss="modal" (click)="onClosePopup()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="add-form">
+                    <input type="text" name="name" [(ngModel)]="name" id="name" placeholder="Enter category name">
+
+                    <input type="text" name="description" [(ngModel)]="description" id="description"
+                        placeholder="Enter category description">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onClosePopup()"
+                    data-dismiss="modal">Discard</button>
+                <button type="submit" class="btn btn-primary" (click)="onSubmitForm()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

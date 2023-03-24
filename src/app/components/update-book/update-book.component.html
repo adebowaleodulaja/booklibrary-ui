@@ -1,0 +1,39 @@
+<div class="modal" style="margin-top: 5%" role="dialog" [ngStyle]="{'display': displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Update Book</h5>
+                <button type="button" class="close"
+                    style="border-radius: 30%; border-width: 0; font-size: 2rem; width: 50px; padding: 0; background: #3B3E52; color: #f4f4f4;"
+                    data-dismiss="modal" (click)="onClosePopup()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="add-form">
+                    <input type="text" name="title" value="Enter book title" [(ngModel)]="title" id="title">
+
+                    <input type="text" name="author" [(ngModel)]="author" id="author">
+
+                    <input type="text" name="publisher" [(ngModel)]="publisher" id="publisher">
+
+                    <input type="text" name="isbn" [(ngModel)]="isbn" id="isbn">
+
+                    <input type="text" name="yearReleased" [(ngModel)]="yearReleased" id="yearReleased">
+
+                    <input type="text" name="noOfCopies" [(ngModel)]="noOfCopies" id="noOfCopies">
+
+                    <select [(ngModel)]="categoryId" name="category">
+                        <option value="0">Select Category</option>
+                        <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+                    </select>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onClosePopup()"
+                    data-dismiss="modal">Discard</button>
+                <button type="submit" class="btn btn-primary" (click)="onSubmitForm()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

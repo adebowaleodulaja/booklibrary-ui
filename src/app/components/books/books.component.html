@@ -1,0 +1,59 @@
+<!-- <h3>Please click on the below button open popup</h3>
+<hr />
+<button style="margin: 50px; padding: 10px" type="button" class="btn btn-primary" (click)="openPopup()">Show Data
+</button>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">GeeksForGeeks</h4>
+            </div>
+            <div class="modal-body">
+                <p>One Stop Solution for all CS problems</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="main-section">
+    <div class="div-btn">
+        <app-button text="Add Book" (btnClick)="openPopup()"></app-button>
+        <!-- <app-button text="Add Category"></app-button> -->
+    </div>
+    <app-books-item *ngFor="let book of books" [book]="book" [category]="book.category"
+        (onIconButtonClicked)="deleteBook(book.id!)" (updateIconClicked)="openUpdateConfirmDialog()">
+        <!-- 
+        [displayStyle]="confirmDisplayStyle" (noButton)="closeConfirmDialog()" "openConfirmDialog()" (yesButton)="deleteBook(book)"> -->
+    </app-books-item>
+</div>
+<app-add-book [displayStyle]="displayStyle" (btnClick)="closePopup()" (onAddBook)="addBook($event)"></app-add-book>
+<app-update-book [displayStyle]="updateConfirmDialogStyle" (btnClick)="closeUpdateConfirmDialog()"
+    (onUpdateBook)="updateBook($event)">
+</app-update-book>
+<!-- <div class="modal" style="margin-top: 20%" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Add New Book</h5>
+                <button type="button" class="close"
+                    style="border-radius: 30%; border-width: 0; font-size: 2rem; width: 50px; background: #3B3E52; color: #f4f4f4;"
+                    data-dismiss="modal" (click)="closePopup()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Content goes here
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closePopup()"
+                    data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> -->

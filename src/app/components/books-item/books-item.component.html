@@ -1,0 +1,52 @@
+<div class="book-container">
+    <div class="flex-display ">
+        <img src="https://images.pexels.com/photos/2237801/pexels-photo-2237801.jpeg?auto=compress&cs=tinysrgb&w=800"
+            alt="">
+
+        <div class="book-sub-section">
+            <h3 class="title-heading ">{{ book?.title }}</h3>
+            <div class="book-details-div">
+                <p>Author: {{book?.author}}</p>
+                <p>ISBN: {{book?.isbn}}</p>
+                <p>Publisher: {{book?.publisher}}</p>
+                <p>Year Released: {{book?.yearReleased}}</p>
+                <p>Copies: {{book?.noOfCopies}}</p>
+                <p>Category: {{book?.category?.name}}</p>
+            </div>
+            <!-- <div style="display: flex;">
+                <p>Categories: </p>
+                <div style="display: flex;">
+                    <p style="margin: 0rem .5rem;" *ngFor="let category of categories;">{{category.name}}</p>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="book-action-button">
+            <p class="colour-secondary"><fa-icon [icon]="faHeart"></fa-icon></p>
+            <p class="colour-secondary" (click)="onUpdateIconClicked()"><fa-icon [icon]="faPencil"></fa-icon></p>
+            <p style="color: #bc2a2a;" (click)="onDeleteIconClicked()"><fa-icon [icon]="faDelete"></fa-icon></p>
+        </div>
+    </div>
+</div>
+
+<!--div class="modal" style="margin-top: 5%" role="dialog" [ngStyle]="{'display': displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Arey you sure you want to delete book id: {{book?.id}}</h5>
+                <button type="button" class="close"
+                    style="border-radius: 30%; border-width: 0; font-size: 2rem; width: 50px; padding: 0; background: #3B3E52; color: #f4f4f4;"
+                    data-dismiss="modal" (click)="onNoClicked()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- <div class="modal-body">
+            </div> -->
+<!--div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onNoClicked()" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-primary" (click)="onYesClicked()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div-->
