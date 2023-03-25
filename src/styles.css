@@ -11,6 +11,7 @@
     --primary: #002D44;
     --primary-50: #30526C;
     --secondary: #FA544B;
+    --textColour: #f4f4f4;
 }
 
 body {
@@ -161,11 +162,12 @@ a {
     text-decoration: none;
     font-size: 15px;
     font-family: inherit;
-    color: #f4f4f4;
+    color: var(--textColour);
 }
 
 .btn:hover {
     background: var(--secondary);
+    color: var(--textColour);
 }
 
 .btn:focus {
@@ -202,7 +204,7 @@ footer {
     padding-top: 30px;
     height: 100px;
     background: var(--primary);
-    color: #f4f4f4;
+    color: var(--textColour);
     text-align: center;
 }
 

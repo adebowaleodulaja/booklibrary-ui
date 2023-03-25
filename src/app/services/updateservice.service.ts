@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Book } from '../model/book';
 
@@ -6,6 +7,7 @@ import { Book } from '../model/book';
     providedIn: 'root'
 })
 export class UpdateService {
+    private updateBookDialogDisplayStyle = 'none';
 
     initialData: Book = {
         title: '',
@@ -17,13 +19,19 @@ export class UpdateService {
         category: { id: 0, name: '', description: '' }
     }
 
-    private newData = new BehaviorSubject<Book>(this.initialData);
+    private bookData = new BehaviorSubject<Book>(this.initialData);
+    currentBookData = this.bookData.asObservable();
 
-    currentData = this.newData.asObservable();
+    private displayFlag = new BehaviorSubject<string>(this.updateBookDialogDisplayStyle);
+    currentFlag = this.displayFlag.asObservable();
 
     constructor() { }
 
-    setCurrentData(data: Book) {
-        this.newData.next(data);
+    setCurrentBookData(data: Book) {
+        this.bookData.next(data);
+    }
+
+    setCurrentFlag(newFlag: string): void {
+        this.displayFlag.next(newFlag);
     }
 }

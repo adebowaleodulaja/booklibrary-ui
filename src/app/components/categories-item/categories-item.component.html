@@ -10,17 +10,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let category of categories" (onDeleteCategory)="deleteCategory(category)">
+            <tr *ngFor="let category of categories">
                 <td>{{category?.name}}</td>
                 <td>{{category?.description}}</td>
                 <td><fa-icon [icon]="faPencil"></fa-icon></td>
-                <td style="color: #bc2a2a;"><fa-icon [icon]="faDelete"></fa-icon></td>
-
+                <td style="color: #bc2a2a;" (click)="deleteCategory(category.id!)"><fa-icon [icon]="faDelete"></fa-icon>
+                </td>
             </tr>
-            <!-- <tr class="active-row">
-                <td>Testing 2</td>
-                <td>This is the second test</td>
-            </tr> -->
         </tbody>
     </table>
 </div>

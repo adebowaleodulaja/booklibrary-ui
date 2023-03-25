@@ -8,7 +8,7 @@
 }
 
 .table-content thead tr {
-    background-color: #3B3E52;
+    background-color: var(--primary);
     color: #ffffff;
     text-align: center;
 }
@@ -26,7 +26,6 @@
 .table-content tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
     font-weight: 100;
-    /* color: #63D5C3; */
 }
 
 .table-content tbody tr:last-of-type {

@@ -31,8 +31,8 @@ export class BookcategoryService {
     return this.http.put<Category>(url, category, httpOptions);
   }
 
-  deleteCategory(category: Category): Observable<Category> {
-    const url = `${this.apiUrl}/${category.id}`;
+  deleteCategory(categoryId: number): Observable<Category> {
+    const url = `${this.apiUrl}/${categoryId}`;
     return this.http.delete<Category>(url);
   }
 }

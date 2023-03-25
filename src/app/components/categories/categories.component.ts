@@ -20,11 +20,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   addCategory(categoryRequestBody: Category) {
-    this.categoryService.addCategory(categoryRequestBody).subscribe((returnedCategory) => (this.categories.push(returnedCategory)));
-  }
-
-  deleteCategory(categoryToDelete: Category) {
-    alert("Want to delete book id " + categoryToDelete.id + " ?");
+    this.categoryService.addCategory(categoryRequestBody).subscribe((returnedCategory) =>
+      (this.categories.push(returnedCategory)));
   }
 
   openPopup() {

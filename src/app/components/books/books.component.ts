@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BooklibraryService } from '../../services/booklibrary.service';
 import { Book } from '../../model/book';
 import { Category } from '../../model/category';
+import { UpdateService } from '../../services/updateservice.service';
 
 @Component({
   selector: 'app-books',
@@ -15,7 +16,7 @@ export class BooksComponent implements OnInit {
   displayStyle = "none";
   updateConfirmDialogStyle = "none";
 
-  constructor(private bookService: BooklibraryService) { }
+  constructor(private bookService: BooklibraryService, private updateService: UpdateService) { }
 
   ngOnInit(): void {
     this.bookService.getBooks().subscribe((books) => this.books = books);
@@ -30,10 +31,6 @@ export class BooksComponent implements OnInit {
       this.bookService.deleteBook(bookId).subscribe(() => (this.books = this.books.filter(book => book.id !== bookId)));
       alert("Book was successfully deleted");
     }
-  }
-
-  updateBook(bookRequestBody: Book) {
-    this.bookService.updateBook(bookRequestBody).subscribe((returnedBook) => (this.books.push(returnedBook)));
   }
 
   openPopup() {

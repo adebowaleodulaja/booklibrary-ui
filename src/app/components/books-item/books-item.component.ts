@@ -2,9 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { BookcategoryService } from '../../services/bookcategory.service';
+import { BooklibraryService } from '../../services/booklibrary.service';
 import { Book } from '../../model/book';
 import { Category } from '../../model/category';
-import { BooklibraryService } from '../../services/booklibrary.service';
+import { UpdateService } from '../../services/updateservice.service';
 
 @Component({
   selector: 'app-books-item',
@@ -13,21 +15,33 @@ import { BooklibraryService } from '../../services/booklibrary.service';
 })
 
 export class BooksItemComponent implements OnInit {
-  books: Book[] = [];
+
   @Input() book?: Book;
+  @Input() bookTitle?: string;
   @Input() category?: Category;
   @Output() onIconButtonClicked = new EventEmitter();
   @Output() updateIconClicked = new EventEmitter();
-  //@Output() noButton = new EventEmitter();
-  //@Input() displayStyle?: string;
+  @Output() onUpdateBook: EventEmitter<Book> = new EventEmitter();
+  @Output() btnClick = new EventEmitter();
+  @Input() updateDisplayStyle?: string;
+  @Input() categories: Category[] = [];
+  @Input() categoryId: number = 0;
+  books: Book[] = [];
+  bookToUpdate!: Book;
+
   faHeart = faHeart;
   faPencil = faPencil;
   faDelete = faTimesCircle;
 
-  constructor(private bookService: BooklibraryService) { }
+  constructor(
+    private categoryService: BookcategoryService,
+    private bookService: BooklibraryService,
+    private bookUpdateService: UpdateService) {
+
+  }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe((books) => this.books = books);
+    this.categoryService.getCategories().subscribe((categories) => this.categories = categories);
   }
 
   onDeleteIconClicked() {
@@ -36,14 +50,26 @@ export class BooksItemComponent implements OnInit {
 
   onUpdateIconClicked() {
     this.updateIconClicked.emit();
+    this.bookUpdateService.setCurrentBookData(this.book!);
+    console.log(this.book);
   }
 
-  /* deleteBook(bookId: number) {
-    if (confirm("Are you sure you want to delete book: " + bookId)) {
-      console.log("Book Id sent: " + bookId);
-      this.bookService.deleteBook(bookId).subscribe(() => (this.books = this.books.filter(book => book.id !== bookId)));
-      // this.bookService.deleteBook(book).subscribe(() => (this.books = this.books.filter(book => book.id !== book.id)));
-    }
-  } */
+  closeUpdateConfirmDialog() {
+    //this.updateDisplayStyle = "none";
+    this.btnClick.emit();
+  }
+
+  getBookToBeUpdated(): Book {
+    this.bookUpdateService.currentBookData.subscribe(bookToUpdate => {
+      this.bookToUpdate = bookToUpdate;
+    });
+    return this.bookToUpdate;
+  }
+
+  updateBook(bookRequestBody: Book) {
+    console.log(bookRequestBody);
+    // this.bookService.updateBook(bookRequestBody).subscribe((returnedBook) => (this.books.push(returnedBook)));
+  }
+
 
 }

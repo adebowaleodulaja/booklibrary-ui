@@ -13,7 +13,6 @@ import { Category } from '../../model/category';
 export class CategoriesItemComponent implements OnInit {
   //@Input() category?: Category;
   categories: Category[] = [];
-  @Output() onDeleteCategory: EventEmitter<Category> = new EventEmitter();
   faHeart = faHeart;
   faPencil = faPencil;
   faDelete = faTimesCircle;
@@ -24,11 +23,12 @@ export class CategoriesItemComponent implements OnInit {
     this.categoryService.getCategories().subscribe((categories) => this.categories = categories);
   }
 
-  onDelete(categoryToDelete?: Category) {
-    this.onDeleteCategory.emit(categoryToDelete);
+  deleteCategory(categoryId: number) {
+    if (confirm("Are you sure you want to delete this category " + categoryId + " ?")) {
+      this.categoryService.deleteCategory(categoryId).subscribe(() =>
+        (this.categories = this.categories.filter(category => category.id !== categoryId)));
+      alert("Category was successfully deleted");
+    }
   }
 
-  deleteCategory(categoryToDelete: Category) {
-    alert("Want to delete book id " + categoryToDelete.id + " ?");
-  }
 }
