@@ -11,24 +11,21 @@
             </div>
             <div class="modal-body">
                 <form class="add-form" #updateBookForm="ngForm">
-                    <input type="text" [(ngModel)]="title" name="title" value={{bookDataToUpdate?.title}} id="title">
+                    <input type="text" [(ngModel)]="bookDataToUpdate.title" name="title" id="title">
 
-                    <input type="text" [(ngModel)]="author" name="author" value={{bookDataToUpdate?.author}}
-                        id="author">
+                    <input type="text" [(ngModel)]="bookDataToUpdate.author" name="author" id="author">
 
-                    <input type="text" [(ngModel)]="publisher" name="publisher" value={{bookDataToUpdate?.publisher}}
-                        id="publisher">
+                    <input type="text" [(ngModel)]="bookDataToUpdate.publisher" name="publisher" id="publisher">
 
-                    <input type="text" [(ngModel)]="isbn" name="isbn" value={{bookDataToUpdate?.isbn}} id="isbn">
+                    <input type="text" [(ngModel)]="bookDataToUpdate.isbn" name="isbn" id="isbn">
 
-                    <input type="text" [(ngModel)]="yearReleased" name="yearReleased"
-                        value={{bookDataToUpdate?.yearReleased}} id="yearReleased">
+                    <input type="text" [(ngModel)]="bookDataToUpdate.yearReleased" name="yearReleased"
+                        id="yearReleased">
 
-                    <input type="text" [(ngModel)]="noOfCopies" name="noOfCopies" value={{bookDataToUpdate?.noOfCopies}}
-                        id="noOfCopies">
+                    <input type="text" [(ngModel)]="bookDataToUpdate.noOfCopies" name="noOfCopies" id="noOfCopies">
 
-                    <select [(ngModel)]="categoryId" name="category">
-                        <option value="{{bookDataToUpdate?.category?.id}}">{{bookDataToUpdate?.category?.name}}</option>
+                    <select [(ngModel)]="bookDataToUpdate.category.id" name="category">
+                        <option value="{{bookDataToUpdate.category.id}}">{{bookDataToUpdate.category.name}}</option>
                         <option value="0">Select Category</option>
                         <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
                     </select>

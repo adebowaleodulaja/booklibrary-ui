@@ -10,7 +10,7 @@ import { UpdateService } from '../../services/updateservice.service';
   styleUrls: ['./update-book.component.css']
 })
 export class UpdateBookComponent {
-  @Input() bookDataToUpdate?: Book;
+  @Input() bookDataToUpdate!: Book;
   toggleStyle!: string;
   title?: string;
   author?: string;
