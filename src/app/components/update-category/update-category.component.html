@@ -1,0 +1,30 @@
+<div class="modal" style="margin-top: 5%" role="dialog" [ngStyle]="{'display': displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookModalLabel">Update Category</h5>
+                <button type="button" class="close"
+                    style="border-radius: 30%; border-width: 0; font-size: 2rem; width: 50px; padding: 0; background: #3B3E52; color: #f4f4f4;"
+                    data-dismiss="modal" (click)="onCloseDialog()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="add-form" #updateCategoryForm="ngForm">
+                    <input type="text" name="name" [ngModel]="categoryDataToUpdate.name" id="name"
+                        placeholder="Enter category name">
+
+                    <input type="text" name="description" [ngModel]="categoryDataToUpdate.description" id="description"
+                        placeholder="Enter category description">
+                    <input type="text" name="id" [ngModel]="categoryDataToUpdate.id" hidden>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCloseDialog()"
+                    data-dismiss="modal">Discard</button>
+                <button type="submit" class="btn btn-primary" (click)="updateCategory(updateCategoryForm.value)">Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>

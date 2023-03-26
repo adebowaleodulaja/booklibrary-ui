@@ -11,20 +11,20 @@
             </div>
             <div class="modal-body">
                 <form class="add-form" #updateBookForm="ngForm">
-                    <input type="text" [(ngModel)]="bookDataToUpdate.title" name="title" id="title">
+                    <input type="text" [ngModel]="bookDataToUpdate.title" name="title" id="title">
 
-                    <input type="text" [(ngModel)]="bookDataToUpdate.author" name="author" id="author">
+                    <input type="text" [ngModel]="bookDataToUpdate.author" name="author" id="author">
 
-                    <input type="text" [(ngModel)]="bookDataToUpdate.publisher" name="publisher" id="publisher">
+                    <input type="text" [ngModel]="bookDataToUpdate.publisher" name="publisher" id="publisher">
 
-                    <input type="text" [(ngModel)]="bookDataToUpdate.isbn" name="isbn" id="isbn">
+                    <input type="text" [ngModel]="bookDataToUpdate.isbn" name="isbn" id="isbn">
 
-                    <input type="text" [(ngModel)]="bookDataToUpdate.yearReleased" name="yearReleased"
-                        id="yearReleased">
+                    <input type="text" [ngModel]="bookDataToUpdate.yearReleased" name="yearReleased" id="yearReleased">
 
-                    <input type="text" [(ngModel)]="bookDataToUpdate.noOfCopies" name="noOfCopies" id="noOfCopies">
+                    <input type="text" [ngModel]="bookDataToUpdate.noOfCopies" name="noOfCopies" id="noOfCopies">
+                    <input type="text" [ngModel]="bookDataToUpdate.id" name="id" value="abc" hidden>
 
-                    <select [(ngModel)]="bookDataToUpdate.category.id" name="category">
+                    <select [ngModel]="bookDataToUpdate.category.id" name="category">
                         <option value="{{bookDataToUpdate.category.id}}">{{bookDataToUpdate.category.name}}</option>
                         <option value="0">Select Category</option>
                         <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
@@ -33,7 +33,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" (click)="onClosePopup()" data-dismiss="modal">Discard</button>
-                <button type="submit" class="btn" (click)="onSubmitForm()">Update</button>
+                <button type="submit" class="btn" (click)="submitData(updateBookForm.value)">Update</button>
             </div>
         </div>
     </div>

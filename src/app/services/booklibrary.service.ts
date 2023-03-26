@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';;
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Book } from '../model/book';
 
 const httpOptions = {
@@ -39,6 +39,10 @@ export class BooklibraryService {
   /*  deleteBook(book: Book): Observable<Book> {
     const url = `${this.apiUrl}/${book.id}`;
     return this.http.delete<Book>(url);
+  } */
+
+  /* handleError(error: HttpErrorResponse) {
+    return throwError(() => error);
   } */
 
 }

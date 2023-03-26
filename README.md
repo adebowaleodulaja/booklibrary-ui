@@ -6,6 +6,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+## How to use
+1. Add Category
+2. Add book, select category for which the book belongs to
+3. To delete a Category, if it belongs to a book already, the book has to be deleted before deleting the category.
+4. A book can be deleted without any constraint.
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

@@ -17,7 +17,6 @@
     </div>
     <div class="button-container">
         <div class="book-action-button">
-            <p class="colour-secondary"><fa-icon [icon]="faHeart"></fa-icon></p>
             <p class="colour-secondary" (click)="onUpdateIconClicked()"><fa-icon [icon]="faPencil"></fa-icon></p>
             <p class="colour-secondary" (click)="onDeleteIconClicked()"><fa-icon [icon]="faDelete"></fa-icon></p>
         </div>
@@ -25,4 +24,4 @@
 </div>
 
 <app-update-book [displayStyle]="updateDisplayStyle" (btnClick)="closeUpdateConfirmDialog()"
-    [bookDataToUpdate]="getBookToBeUpdated()" (onUpdateBook)="updateBook($event)"></app-update-book>
+    [bookDataToUpdate]="getBookToBeUpdated()"></app-update-book>

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Book } from '../model/book';
+import { Category } from '../model/category';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UpdateService {
-    private updateBookDialogDisplayStyle = 'none';
-
     initialData: Book = {
         title: '',
         publisher: '',
@@ -19,11 +18,19 @@ export class UpdateService {
         category: { id: 0, name: '', description: '' }
     }
 
-    private bookData = new BehaviorSubject<Book>(this.initialData);
-    currentBookData = this.bookData.asObservable();
+    initialCategoryData: Category = {
+        id: 0,
+        name: '',
+        description: ''
+    }
 
-    private displayFlag = new BehaviorSubject<string>(this.updateBookDialogDisplayStyle);
-    currentFlag = this.displayFlag.asObservable();
+    private favourite: boolean = false;
+    private subject = new Subject<any>();
+    private bookData = new BehaviorSubject<Book>(this.initialData);
+    private categoryData = new BehaviorSubject<Category>(this.initialCategoryData);
+
+    currentBookData = this.bookData.asObservable();
+    currentCategoryData = this.categoryData.asObservable();
 
     constructor() { }
 
@@ -31,7 +38,16 @@ export class UpdateService {
         this.bookData.next(data);
     }
 
-    setCurrentFlag(newFlag: string): void {
-        this.displayFlag.next(newFlag);
+    setCurrentCategoryData(data: Category) {
+        this.categoryData.next(data);
+    }
+
+    toggleFavourite(): void {
+        this.favourite = !this.favourite;
+        this.subject.next(this.favourite);
+    }
+
+    onToggleFavourite(): Observable<any> {
+        return this.subject.asObservable();
     }
 }

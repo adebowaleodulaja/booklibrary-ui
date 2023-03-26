@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Book } from '../../model/book';
 import { BookcategoryService } from '../../services/bookcategory.service';
 import { Category } from '../../model/category';
-import { UpdateService } from '../../services/updateservice.service';
+import { BooklibraryService } from '../../services/booklibrary.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-update-book',
@@ -21,64 +23,65 @@ export class UpdateBookComponent {
   category?: Category;
   categories: Category[] = [];
   categoryId!: number;
-  //bookData: any = {};
-  @Output() onUpdateBook: EventEmitter<Book> = new EventEmitter();
   @Input() displayStyle?: string;
   @Output() btnClick = new EventEmitter();
 
-  constructor(private bookCategoryService: BookcategoryService, private updateService: UpdateService) {
-    // updateService.onToggle().subscribe((flag: string) => { this.toggleStyle = flag });
+  newBook: any = {}
+
+  constructor(
+    private bookCategoryService: BookcategoryService,
+    private bookService: BooklibraryService) {
   }
 
   ngOnInit(): void {
     this.bookCategoryService.getCategories().subscribe((categories) => this.categories = categories);
   }
 
-  onClosePopup() {
-    this.btnClick.emit();
-  }
-
-  onSubmitForm() {
-    const newBook = {
-      title: this.title!,
-      publisher: this.publisher!,
-      author: this.author!,
-      isbn: this.isbn!,
-      yearReleased: this.yearReleased!,
-      noOfCopies: this.noOfCopies!,
-      category: this.category!
-    }
-    this.onUpdateBook.emit(newBook);
-    /* if (!this.title) {
-      alert("Please enter a book title");
-      return;
-    }
-    else if (this.categoryId == 0) {
-      alert("Please select a category");
-      return
-    }
-    this.category = { id: this.categoryId, name: '', description: '' };
-
-    const newBook = {
-      title: this.title,
-      publisher: this.publisher!,
-      author: this.author!,
-      isbn: this.isbn!,
-      yearReleased: this.yearReleased!,
-      noOfCopies: this.noOfCopies!,
+  submitData(data: NgForm) {
+    this.newBook = data;
+    this.category = { id: parseInt(this.newBook.category), name: '', description: '' }
+    const bookData = {
+      id: this.newBook.id,
+      title: this.newBook.title,
+      publisher: this.newBook.publisher,
+      author: this.newBook.author,
+      isbn: this.newBook.isbn,
+      yearReleased: this.newBook.yearReleased,
+      noOfCopies: this.newBook.noOfCopies,
       category: this.category
     }
+    console.log(bookData);
 
-    this.onUpdateBook.emit(newBook);
+    if (!this.newBook.isbn) {
+      alert("Book ISBN is required");
+      return;
+    } else if (!this.newBook.yearReleased) {
+      alert("Year released is required");
+      return;
+    } else if (!this.newBook.noOfCopies) {
+      alert("No of copies is required");
+      return;
+    } else if (!this.newBook.publisher) {
+      alert("Publisher is required");
+      return;
+    } else if (this.newBook.category == 0) {
+      alert("Please select a category");
+      return;
+    }
 
-    alert("A new book has been successfully added.");
+    of(this.bookService.updateBook(bookData).subscribe({
+      next: (returnedBook) => {
+        if (returnedBook) {
+          alert("Book has been successfully updated.");
+        }
+      },
+      error: (err) => alert("An error occurred, details below\n " + err.message)
+    }));//(this.books.push(returnedBook)
+    this.onClosePopup();
+  }
 
-    this.title = '';
-    this.author = '';
-    this.publisher = '';
-    this.isbn = '';
-    this.yearReleased = '';
-    this.noOfCopies = ''; */
+  onClosePopup() {
+    this.btnClick.emit();
   }
 
 }

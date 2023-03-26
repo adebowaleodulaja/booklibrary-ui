@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BookcategoryService } from '../../services/bookcategory.service';
 import { Category } from '../../model/category';
 
 @Component({
@@ -15,7 +14,7 @@ export class AddCategoryComponent implements OnInit {
   @Input() displayStyle?: string;
   @Output() btnClick = new EventEmitter();
 
-  constructor(private bookCategoryService: BookcategoryService) { }
+  constructor() { }
 
   ngOnInit(): void {
 
@@ -38,7 +37,7 @@ export class AddCategoryComponent implements OnInit {
 
     this.onAddCategory.emit(newCategory);
 
-    alert("A new category has been successfully added.");
+    //alert("A new category has been successfully added.");
 
     this.name = '';
     this.description = '';

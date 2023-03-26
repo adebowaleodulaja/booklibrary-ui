@@ -37,10 +37,21 @@ export class AddBookComponent implements OnInit {
     if (!this.title) {
       alert("Please enter a book title");
       return;
-    }
-    else if (this.categoryId == 0) {
+    } else if (!this.isbn) {
+      alert("Book ISBN is required");
+      return;
+    } else if (!this.yearReleased) {
+      alert("Year released is required");
+      return;
+    } else if (!this.noOfCopies) {
+      alert("No of copies is required");
+      return;
+    } else if (!this.publisher) {
+      alert("Publisher is required");
+      return;
+    } else if (this.categoryId == 0) {
       alert("Please select a category");
-      return
+      return;
     }
     this.category = { id: this.categoryId, name: '', description: '' };
 

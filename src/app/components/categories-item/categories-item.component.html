@@ -13,10 +13,12 @@
             <tr *ngFor="let category of categories">
                 <td>{{category?.name}}</td>
                 <td>{{category?.description}}</td>
-                <td><fa-icon [icon]="faPencil"></fa-icon></td>
+                <td (click)="onUpdateIconClicked(category)"><fa-icon [icon]="faPencil"></fa-icon></td>
                 <td style="color: #bc2a2a;" (click)="deleteCategory(category.id!)"><fa-icon [icon]="faDelete"></fa-icon>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+<app-update-category [categoryDataToUpdate]="getCategoryToUpdate()" [displayStyle]="displayStyle"
+    (discardButton)="closeDialog()"></app-update-category>

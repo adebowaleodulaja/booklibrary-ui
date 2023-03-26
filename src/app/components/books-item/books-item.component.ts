@@ -3,10 +3,10 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { BookcategoryService } from '../../services/bookcategory.service';
-import { BooklibraryService } from '../../services/booklibrary.service';
 import { Book } from '../../model/book';
 import { Category } from '../../model/category';
 import { UpdateService } from '../../services/updateservice.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-books-item',
@@ -19,15 +19,17 @@ export class BooksItemComponent implements OnInit {
   @Input() book?: Book;
   @Input() bookTitle?: string;
   @Input() category?: Category;
+  @Input() updateDisplayStyle?: string;
+  @Input() categories: Category[] = [];
+  @Input() categoryId: number = 0;
   @Output() onIconButtonClicked = new EventEmitter();
   @Output() updateIconClicked = new EventEmitter();
   @Output() onUpdateBook: EventEmitter<Book> = new EventEmitter();
   @Output() btnClick = new EventEmitter();
-  @Input() updateDisplayStyle?: string;
-  @Input() categories: Category[] = [];
-  @Input() categoryId: number = 0;
   books: Book[] = [];
   bookToUpdate!: Book;
+  favourite!: boolean;
+  subscription!: Subscription;
 
   faHeart = faHeart;
   faPencil = faPencil;
@@ -35,13 +37,12 @@ export class BooksItemComponent implements OnInit {
 
   constructor(
     private categoryService: BookcategoryService,
-    private bookService: BooklibraryService,
-    private bookUpdateService: UpdateService) {
-
+    private updateService: UpdateService) {
   }
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe((categories) => this.categories = categories);
+    this.subscription = this.updateService.onToggleFavourite().subscribe(val => this.favourite = val);
   }
 
   onDeleteIconClicked() {
@@ -50,7 +51,7 @@ export class BooksItemComponent implements OnInit {
 
   onUpdateIconClicked() {
     this.updateIconClicked.emit();
-    this.bookUpdateService.setCurrentBookData(this.book!);
+    this.updateService.setCurrentBookData(this.book!);
     console.log(this.book);
   }
 
@@ -59,16 +60,15 @@ export class BooksItemComponent implements OnInit {
     this.btnClick.emit();
   }
 
+  onFavouriteIconClicked() {
+    this.updateService.toggleFavourite();
+  }
+
   getBookToBeUpdated(): Book {
-    this.bookUpdateService.currentBookData.subscribe(bookToUpdate => {
+    this.updateService.currentBookData.subscribe(bookToUpdate => {
       this.bookToUpdate = bookToUpdate;
     });
     return this.bookToUpdate;
-  }
-
-  updateBook(bookRequestBody: Book) {
-    console.log(bookRequestBody);
-    // this.bookService.updateBook(bookRequestBody).subscribe((returnedBook) => (this.books.push(returnedBook)));
   }
 
 

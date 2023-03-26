@@ -16,6 +16,7 @@ import { CategoriesItemComponent } from './components/categories-item/categories
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { AddCategoryComponent } from './components/add-category/add-category.component';
 import { UpdateBookComponent } from './components/update-book/update-book.component';
+import { UpdateCategoryComponent } from './components/update-category/update-category.component';
 
 const appRoutes: Routes = [
   { path: '', component: BooksComponent },
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
     AddBookComponent,
     AddCategoryComponent,
     UpdateBookComponent,
+    UpdateCategoryComponent,
   ],
   imports: [
     BrowserModule,
